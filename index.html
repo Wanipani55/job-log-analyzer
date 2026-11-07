@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ジョブログ解析ツール</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔍 ジョブログ解析ツール</h1>
+      <p class="subtitle">ログを貼り付けると、エラー箇所を色付けしてヒントを表示します</p>
+    </header>
+
+    <main>
+      <section class="input-section">
+        <div class="section-header">
+          <label for="log-input">ジョブログを貼り付け</label>
+          <button id="clear-btn" class="btn-ghost">クリア</button>
+        </div>
+        <textarea
+          id="log-input"
+          placeholder="ここにジョブログをペーストしてください..."
+          spellcheck="false"
+        ></textarea>
+        <div class="actions">
+          <button id="analyze-btn" class="btn-primary">解析する</button>
+          <span id="summary-badge" class="summary-badge hidden"></span>
+        </div>
+      </section>
+
+      <section class="output-section hidden" id="output-section">
+        <h2>解析結果</h2>
+        <div id="log-display" class="log-display"></div>
+      </section>
+
+      <section class="detail-section hidden" id="detail-section">
+        <h2>エラー詳細・ヒント</h2>
+        <div id="detail-list" class="detail-list"></div>
+      </section>
+    </main>
+
+    <footer>
+      <p>社内利用専用 ― ログに個人情報・機密情報が含まれないことを確認してから貼り付けてください</p>
+    </footer>
+  </div>
+
+  <script src="analyzer.js"></script>
+</body>
+</html>
