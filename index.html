@@ -1,50 +1,95 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ジョブログ解析ツール</title>
+  <title>Job Log Analyzer</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
+
+    <!-- Header -->
     <header>
-      <h1>🔍 ジョブログ解析ツール</h1>
-      <p class="subtitle">ログを貼り付けると、エラー箇所を色付けしてヒントを表示します</p>
+      <div class="header-eyebrow">Internal Dev Tool</div>
+      <h1>Job Log <span>Analyzer</span></h1>
+      <p class="subtitle">Paste your job log — errors are highlighted with hints to level up your skills</p>
     </header>
 
-    <main>
-      <section class="input-section">
-        <div class="section-header">
-          <label for="log-input">ジョブログを貼り付け</label>
-          <button id="clear-btn" class="btn-ghost">クリア</button>
+    <!-- XP / Level Bar -->
+    <div class="xp-bar-wrap">
+      <div class="xp-avatar" id="xp-avatar">🔰</div>
+      <div class="xp-info">
+        <div class="xp-top">
+          <span class="xp-level" id="xp-level-label">Lv.1</span>
+          <span class="xp-label" id="xp-rank-label">Rookie</span>
         </div>
-        <textarea
-          id="log-input"
-          placeholder="ここにジョブログをペーストしてください..."
-          spellcheck="false"
-        ></textarea>
-        <div class="actions">
-          <button id="analyze-btn" class="btn-primary">解析する</button>
-          <span id="summary-badge" class="summary-badge hidden"></span>
+        <div class="xp-track">
+          <div class="xp-fill" id="xp-fill"></div>
         </div>
-      </section>
+        <div class="xp-numbers" id="xp-numbers">0 / 100 XP</div>
+      </div>
+      <div class="badge-row" id="badge-row">
+        <span class="badge" data-badge="first">1st Run</span>
+        <span class="badge" data-badge="streak3">Streak×3</span>
+        <span class="badge" data-badge="errorhunter">Error Hunter</span>
+        <span class="badge" data-badge="flawless">Flawless</span>
+      </div>
+    </div>
 
-      <section class="output-section hidden" id="output-section">
-        <h2>解析結果</h2>
-        <div id="log-display" class="log-display"></div>
-      </section>
+    <!-- Mode Toggle -->
+    <div class="mode-toggle-wrap">
+      <div class="mode-toggle">
+        <button class="mode-btn beginner active" id="btn-beginner">🌱 Beginner</button>
+        <button class="mode-btn experienced" id="btn-experienced">⚡ Experienced</button>
+      </div>
+    </div>
+    <p class="mode-desc" id="mode-desc">
+      Beginner — full explanation + manual reference shown for each finding
+    </p>
 
-      <section class="detail-section hidden" id="detail-section">
-        <h2>エラー詳細・ヒント</h2>
-        <div id="detail-list" class="detail-list"></div>
-      </section>
-    </main>
+    <!-- Input -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Paste Job Log</span>
+        <button id="clear-btn" class="btn-ghost">Clear</button>
+      </div>
+      <textarea
+        id="log-input"
+        placeholder="Paste your job log here..."
+        spellcheck="false"
+      ></textarea>
+      <div class="actions">
+        <button id="analyze-btn" class="btn-primary">Analyze</button>
+        <span id="summary-badge" class="summary-badge hidden"></span>
+      </div>
+    </div>
 
-    <footer>
-      <p>社内利用専用 ― ログに個人情報・機密情報が含まれないことを確認してから貼り付けてください</p>
-    </footer>
-  </div>
+    <!-- Log Output -->
+    <div class="card hidden" id="output-section">
+      <div class="card-header">
+        <span class="card-title">Highlighted Log</span>
+        <span style="font-size:.75rem;color:var(--muted);">Click a red/yellow line to jump to details</span>
+      </div>
+      <div id="log-display" class="log-display"></div>
+    </div>
+
+    <!-- Detail / Hints -->
+    <div class="card hidden" id="detail-section">
+      <div class="card-header">
+        <span class="card-title">Findings &amp; Hints</span>
+      </div>
+      <div id="detail-list" class="detail-list"></div>
+    </div>
+
+  </div><!-- /.container -->
+
+  <!-- XP Toast -->
+  <div class="xp-toast" id="xp-toast"></div>
+
+  <footer>
+    Internal use only — remove sensitive data before pasting
+  </footer>
 
   <script src="analyzer.js"></script>
 </body>
